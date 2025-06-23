@@ -32,6 +32,10 @@ class SettingController extends Controller
             'ad2' => 'nullable|string',
         ]);
 
+        if (!empty($settingsValidated['ad2'])) {
+            $settingsValidated['ad2'] = base64_encode($settingsValidated['ad2']);
+        }
+
         // Update Settings
         Settings::updateOrCreate(['id' => 1], $settingsValidated);
 

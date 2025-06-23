@@ -102,7 +102,7 @@
                             Section 2</label>
                         <div class="mt-1">
                             <textarea name="ad2" id="ad2" rows="4" placeholder="Enter HTML or JavaScript code for ad section 2"
-                                class="block w-full rounded-md border-surface-300 py-2 text-surface-900 placeholder:text-surface-400 focus:border-brand-500 focus:ring-brand-500 dark:border-surface-600 dark:bg-surface-700 dark:text-white dark:placeholder:text-surface-500">{{ old('ad2', $settings->ad2) }}</textarea>
+                                class="block w-full rounded-md border-surface-300 py-2 text-surface-900 placeholder:text-surface-400 focus:border-brand-500 focus:ring-brand-500 dark:border-surface-600 dark:bg-surface-700 dark:text-white dark:placeholder:text-surface-500">{{ old('ad2', isset($settings->ad2) ? base64_decode($settings->ad2) : '') }}</textarea>
                             <p class="mt-1.5 text-xs text-surface-500 dark:text-surface-400">HTML or JavaScript code for the
                                 second ad section</p>
                         </div>

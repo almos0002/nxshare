@@ -44,6 +44,6 @@
             If any link is not working then please report us we will try to fix that link within 2-3 days. Thank You!!
          </p>
       </footer>
-      {!! $settings->ad2 !!}
+      {!! isset($settings->ad2) ? base64_decode($settings->ad2) : '' !!}
    </body>
 </html>
