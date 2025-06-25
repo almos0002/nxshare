@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +10,23 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
-        html, body{
+
+        html,
+        body {
             font-family: "Barlow Condensed", sans-serif;
             background: radial-gradient(ellipse at bottom, #ffffff 0%, #f3f4f6 100%);
         }
-        .gradient{
-            background: radial-gradient(
-            circle at 20% 20%,
-            #fde68a55 0%,
-            transparent 40%
-        ),
-        radial-gradient(circle at 80% 80%, #93c5fd55 0%, transparent 40%);
-}
+
+        .gradient {
+            background: radial-gradient(circle at 20% 20%,
+                    #fde68a55 0%,
+                    transparent 40%),
+                radial-gradient(circle at 80% 80%, #93c5fd55 0%, transparent 40%);
+        }
         }
     </style>
 </head>
+
 <body class="min-h-screen gradient flex items-center justify-center p-4">
     <div class="text-center space-y-4">
         {!! $settings->ad1 !!}
@@ -39,10 +42,11 @@
         </div>
 
         <!-- Launch Button -->
-        <button id="getAccessBtn" 
-                class="w-full bg-gradient-to-r from-amber-400 to-orange-400 py-4 px-8
+        <button id="getAccessBtn"
+            class="w-full bg-gradient-to-r from-amber-400 to-orange-400 py-4 px-8
                        text-gray-800 hover:text-gray-900 transition-all duration-300 disabled:opacity-50
-                       group relative" disabled>
+                       group relative"
+            disabled>
             <span class="relative z-10 flex items-center justify-center space-x-2">
                 <span>Please Wait</span>
                 <i class="ri-loader-4-line animate-spin"></i>
@@ -91,12 +95,13 @@
 
             // Create burst effect
             const burst = document.createElement('div');
-            burst.className = 'absolute inset-0 bg-gradient-to-r from-amber-300 to-orange-300 rounded-xl animate-starburst';
+            burst.className =
+                'absolute inset-0 bg-gradient-to-r from-amber-300 to-orange-300 rounded-xl animate-starburst';
             button.appendChild(burst);
             setTimeout(() => burst.remove(), 1000);
 
             try {
-                const response = await fetch('{{ route("generate.token") }}', {
+                const response = await fetch('{{ route('generate.token') }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -109,12 +114,13 @@
                 });
 
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     button.innerHTML = `<span>Entering Secure Link...</span>`;
                     document.body.style.animation = 'warp 2s linear infinite';
                     setTimeout(() => {
-                        window.location.href = `{{ url("/{$accessType}/{$postSlug}") }}?token=${data.token}`;
+                        window.location.href =
+                            `{{ url("/{$accessType}/{$postSlug}") }}?token=${data.token}`;
                     }, 2000);
                 } else {
                     throw new Error(data.message || 'Photon Overload Detected');
@@ -133,8 +139,8 @@
                 }, 2000);
             }
         });
-
     </script>
-    {!! $settings->ad2 !!}
+    {!! isset($settings->ad2) ? base64_decode($settings->ad2) : '' !!}
 </body>
+
 </html>
